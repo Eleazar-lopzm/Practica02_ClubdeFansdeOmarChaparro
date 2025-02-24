@@ -28,6 +28,9 @@ def leer_csv(archivo):
         with open(archivo, mode='r', encoding='utf-8') as file:
             reader = csv.reader(file)
             filas = list(reader)
+            if not filas:
+                print("El archivo esta vacio")
+                return []
             
             if filas:
                 print("Datos leídos del archivo:")

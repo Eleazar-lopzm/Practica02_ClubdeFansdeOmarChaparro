@@ -1,6 +1,8 @@
 #administracion/administracion Persona
 from manejocsv import guardar_en_csv, leer_csv, buscar_en_csv, eliminar_en_csv, editar_campo_csv
 
+
+
 class AdministracionPersona:
     """
     Servicio base para operaciones comunes de objetos de tipo Persona.
@@ -45,5 +47,7 @@ class AdministracionPersona:
         """
         editar_campo_csv(self.archivo_csv, id, campo, nuevo_valor)
     
-    def leer(self, archivo_csv):
+    def leer(self):
         leer_csv(self.archivo_csv)
+    
+    

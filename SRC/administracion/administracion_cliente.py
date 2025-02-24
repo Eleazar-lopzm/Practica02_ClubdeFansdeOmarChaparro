@@ -1,6 +1,5 @@
 # administracion/administracion_cliente.py
 from administracion.administracion_persona import AdministracionPersona
-
 class AdministracionCliente(AdministracionPersona):
     """
     Administración específica para clientes.
@@ -10,25 +9,14 @@ class AdministracionCliente(AdministracionPersona):
             'id_cliente', 'primer_nombre', 'segundo_nombre', 'apellido_paterno', 'apellido_materno',
             'calle', 'ciudad', 'codigo_postal', 'telefono'
         ])
+        self.clientes = self.leer_cliente()  # Cargar los clientes al inicializar
+    
 
-    def generar_id_cliente(self):
-        # Leer los clientes existentes
-        clientes = super().leer(self.archivo_csv)
 
-        # Si ya existen clientes, generar el id_cliente basado en el máximo ID actual
-        if clientes:
-            # Extraemos el id_cliente de los clientes existentes y buscamos el máximo
-            ids_existentes = [int(cliente[0]) for cliente in clientes]  # Convertimos los ids a enteros
-            nuevo_id = max(ids_existentes) + 1  # El nuevo ID será el máximo + 1
-        else:
-            # Si no hay clientes, el primer id será 1
-            nuevo_id = 1
-        
-        return nuevo_id
     
     def agregar_cliente(self):
         # Generar automáticamente un nuevo id_cliente
-        id_cliente = self.generar_id_cliente()
+        id_cliente = self.generar_id_clientes()
 
         primer_nombre = input("Ingrese el primer nombre: ")
         segundo_nombre = input("Ingrese el segundo nombre: ")
@@ -70,24 +58,12 @@ class AdministracionCliente(AdministracionPersona):
         print("2. Segundo Nombre")
         print("3. Apellido Paterno")
         print("4. Apellido Materno")
-        print("5. Calle")
-        print("6. Ciudad")
-        print("7. Código Postal")
-        print("8. Teléfono")
-        print("9. Dirección (Calle, Ciudad, Código Postal)")
+        print("5. Dirección (Calle, Ciudad, Código Postal)")
         
         campo = input("Ingrese el número del campo a editar: ")
 
-        # Según el campo, se edita el valor correspondiente
-        if campo == '9':  # Si es dirección
-            calle = input(f"Ingrese la nueva calle (actual: {cliente[5]}): ")
-            ciudad = input(f"Ingrese la nueva ciudad (actual: {cliente[6]}): ")
-            codigo_postal = input(f"Ingrese el nuevo código postal (actual: {cliente[7]}): ")
-            # Actualizamos los datos en la lista
-            cliente[5] = calle
-            cliente[6] = ciudad
-            cliente[7] = codigo_postal
-        elif campo == '1':
+        
+        if campo == '1':
             nuevo_valor = input(f"Ingrese el nuevo primer nombre (actual: {cliente[1]}): ")
             cliente[1] = nuevo_valor
         elif campo == '2':
@@ -100,17 +76,11 @@ class AdministracionCliente(AdministracionPersona):
             nuevo_valor = input(f"Ingrese el nuevo apellido materno (actual: {cliente[4]}): ")
             cliente[4] = nuevo_valor
         elif campo == '5':
-            nuevo_valor = input(f"Ingrese la nueva calle (actual: {cliente[5]}): ")
+            nuevo_valor = input(f"Ingrese la nueva direccion (actual: {cliente[5]}): ")
             cliente[5] = nuevo_valor
         elif campo == '6':
-            nuevo_valor = input(f"Ingrese la nueva ciudad (actual: {cliente[6]}): ")
-            cliente[6] = nuevo_valor
-        elif campo == '7':
-            nuevo_valor = input(f"Ingrese el nuevo código postal (actual: {cliente[7]}): ")
-            cliente[7] = nuevo_valor
-        elif campo == '8':
             nuevo_valor = input(f"Ingrese el nuevo teléfono (actual: {cliente[8]}): ")
-            cliente[8] = nuevo_valor
+            cliente[6] = nuevo_valor
         else:
             print("Opción no válida.")
             return
@@ -125,13 +95,29 @@ class AdministracionCliente(AdministracionPersona):
         return super().eliminar(id_cliente)
     
     def leer_cliente(self): 
-        # Llamar al método 'leer' de la clase base con la ruta ya configurada
-        clientes = super().leer('datos/clientes.csv')
-
-        if clientes:
-            print("Clientes leidos del CSV:")
-            for cliente in clientes:
-                print(cliente)
-        else:
-            print("No se encontraron mas clientes o el archivo esta vacio")
+        """Lee el archivo de clientes y devuelve una lista de filas."""
+        try:
+            with open('datos/clientes.csv', mode='r', encoding='utf-8') as file:
+                reader = csv.reader(file)
+                filas = list(reader)
+                if not filas:
+                    print("El archivo esta vacio")
+                    return []
+                
+                if filas:
+                    print("Datos leídos del archivo clientes:")
+                    for fila in filas:
+                        contador = contador +1
+                        print(fila)
+                else:
+                    print("El archivo está vacío.")
+                
+                return filas
+        except FileNotFoundError:
+            print(f"Error: El archivo {self.archivo_csv} no se encuentra.")
+            return []
+        except Exception as e:
+            print(f"Error al leer el archivo: {e}")
+            return []
         
+    

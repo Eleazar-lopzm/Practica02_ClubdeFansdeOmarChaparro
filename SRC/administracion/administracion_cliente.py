@@ -95,29 +95,5 @@ class AdministracionCliente(AdministracionPersona):
         return super().eliminar(id_cliente)
     
     def leer_cliente(self): 
-        """Lee el archivo de clientes y devuelve una lista de filas."""
-        try:
-            with open('datos/clientes.csv', mode='r', encoding='utf-8') as file:
-                reader = csv.reader(file)
-                filas = list(reader)
-                if not filas:
-                    print("El archivo esta vacio")
-                    return []
-                
-                if filas:
-                    print("Datos leídos del archivo clientes:")
-                    for fila in filas:
-                        contador = contador +1
-                        print(fila)
-                else:
-                    print("El archivo está vacío.")
-                
-                return filas
-        except FileNotFoundError:
-            print(f"Error: El archivo {self.archivo_csv} no se encuentra.")
-            return []
-        except Exception as e:
-            print(f"Error al leer el archivo: {e}")
-            return []
-        
+        return super().leer(archivo)
     

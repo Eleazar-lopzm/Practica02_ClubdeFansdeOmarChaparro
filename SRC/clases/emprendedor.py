@@ -1,3 +1,4 @@
+#clases/emprendedor.py
 from .persona import Persona  # Importar la clase Persona
 
 class Emprendedor(Persona):

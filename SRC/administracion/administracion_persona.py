@@ -1,3 +1,4 @@
+#administracion/administracion Persona
 from manejocsv import guardar_en_csv, leer_csv, buscar_en_csv, eliminar_en_csv, editar_campo_csv
 
 class AdministracionPersona:
@@ -7,7 +8,7 @@ class AdministracionPersona:
     def __init__(self, archivo_csv, encabezados):
         self.archivo_csv = archivo_csv
         self.encabezados = encabezados
-
+    
     def agregar(self, datos):
         """
         Agrega una nueva persona al archivo CSV.
@@ -43,3 +44,6 @@ class AdministracionPersona:
             nuevo_valor (str): Nuevo valor para el campo.
         """
         editar_campo_csv(self.archivo_csv, id, campo, nuevo_valor)
+    
+    def leer(self, archivo):
+        leer_csv(self.archivo_csv)

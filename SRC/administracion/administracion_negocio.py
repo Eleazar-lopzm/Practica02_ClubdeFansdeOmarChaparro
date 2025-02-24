@@ -1,3 +1,4 @@
+#administracion/administracion negocio
 from manejocsv import guardar_en_csv, leer_csv, buscar_en_csv, eliminar_en_csv, editar_campo_csv
 
 class AdministracionNegocio:
@@ -9,8 +10,8 @@ class AdministracionNegocio:
         self.encabezados = [
             'id_negocio', 'nombre', 'calle', 'ciudad', 'codigo_postal', 'rubro'
         ]
-
-    def agregar(self, datos):
+        
+    def agregar_negocio(self, datos):
         """
         Agrega un nuevo negocio al archivo CSV.
         Parámetros:
@@ -18,7 +19,7 @@ class AdministracionNegocio:
         """
         guardar_en_csv(self.archivo_csv, datos)
 
-    def consultar(self, id):
+    def consultar_negocio(self, id):
         """
         Consulta un negocio por su ID.
         Parámetros:
@@ -28,7 +29,7 @@ class AdministracionNegocio:
         """
         return buscar_en_csv(self.archivo_csv, id)
 
-    def eliminar(self, id):
+    def eliminar_negocio(self, id):
         """
         Elimina un negocio por su ID.
         Parámetros:
@@ -36,7 +37,7 @@ class AdministracionNegocio:
         """
         eliminar_en_csv(self.archivo_csv, id)
 
-    def editar(self, id, campo, nuevo_valor):
+    def editar_negocio(self, id, campo, nuevo_valor):
         """
         Edita un campo específico de un negocio.
         Parámetros:
@@ -45,3 +46,6 @@ class AdministracionNegocio:
             nuevo_valor (str): Nuevo valor para el campo.
         """
         editar_campo_csv(self.archivo_csv, id, campo, nuevo_valor)
+    
+    def leer_negocio(self, archivo ):
+        leer_csv(archivo)

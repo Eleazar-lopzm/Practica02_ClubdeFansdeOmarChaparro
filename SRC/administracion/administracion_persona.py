@@ -45,5 +45,5 @@ class AdministracionPersona:
         """
         editar_campo_csv(self.archivo_csv, id, campo, nuevo_valor)
     
-    def leer(self, archivo):
+    def leer(self, archivo_csv):
         leer_csv(self.archivo_csv)

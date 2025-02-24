@@ -24,10 +24,27 @@ def leer_csv(archivo):
     
     Abre el archivo en modo read, crea un reader para el archivo y nos regresa una lista de los datos
     """
-    
-    with open(archivo, mode='r', encoding='utf-8') as file:
-        reader = csv.reader(file)
-        return list(reader)
+    try:
+        with open(archivo, mode='r', encoding='utf-8') as file:
+            reader = csv.reader(file)
+            filas = list(reader)
+            
+            if filas:
+                print("Datos leídos del archivo:")
+                for fila in filas:
+                    print(fila)
+            else:
+                print("El archivo está vacío.")
+            
+            return filas
+    except FileNotFoundError:
+        print(f"Error: El archivo {archivo} no se encuentra.")
+        return []
+    except Exception as e:
+        print(f"Error al leer el archivo: {e}")
+        return []
+
+
 
 
 def buscar_en_csv(archivo, id):

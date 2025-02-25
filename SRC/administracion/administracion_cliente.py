@@ -9,15 +9,15 @@ class AdministracionCliente(AdministracionPersona):
             'id_cliente', 'primer_nombre', 'segundo_nombre', 'apellido_paterno', 'apellido_materno',
             'calle', 'ciudad', 'codigo_postal', 'telefono'
         ])
-        self.clientes = self.leer_cliente()  # Cargar los clientes al inicializar
+        
     
 
 
     
     def agregar_cliente(self):
-        # Generar automáticamente un nuevo id_cliente
-        id_cliente = self.generar_id_clientes()
-
+        
+        
+        id_cliente = input("Ingrese ID del cliente:")
         primer_nombre = input("Ingrese el primer nombre: ")
         segundo_nombre = input("Ingrese el segundo nombre: ")
         apellido_paterno = input("Ingrese el apellido paterno: ")
@@ -95,5 +95,6 @@ class AdministracionCliente(AdministracionPersona):
         return super().eliminar(id_cliente)
     
     def leer_cliente(self): 
-        return super().leer(archivo)
+        archivo_csv = 'datos/clientes.csv'
+        return super().leer(archivo_csv)
     
